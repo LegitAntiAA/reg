@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регламент</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- background blur orbs n stuff -->
+    <div class="bg-effects">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- this box highlights search results when u click em -->
+    <div class="search-highlight-box" id="searchHighlightBox"></div>
+
+    <!-- top navigation bar -->
+    <nav class="top-nav">
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-section="reglament">Регламент</button>
+            <button class="nav-tab" data-section="templates-withdrawal">Шаблоны выплаты</button>
+            <button class="nav-tab" data-section="templates-deposit">Шаблоны депозита</button>
+        </div>
+
+        <!-- save/load buttons - only visible in edit mode -->
+        <div class="nav-center" id="navCenter">
+            <button class="nav-btn nav-btn-save" id="saveBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                Сохранить
+            </button>
+            <button class="nav-btn nav-btn-load" id="loadBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="17 8 12 3 7 8"/>
+                    <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                Загрузить
+            </button>
+        </div>
+
+        <div class="nav-right">
+            <div class="search-container">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.3-4.3"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Поиск..." id="searchInput">
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- left sidebar with all the tabs -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">Разделы</span>
+                <button class="add-tab-btn" id="addTabBtn" title="Добавить раздел">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19"/>
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="sidebar-content" id="sidebarContent"></div>
+        </aside>
+
+        <!-- main content area -->
+        <main class="content-area">
+            <div class="content-header">
+                <h1 class="content-title" id="contentTitle">Выберите раздел</h1>
+                <button class="content-edit-btn" id="contentEditBtn" title="Редактировать">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="content-body" id="contentBody">
+                <div class="empty-state">
+                    <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    <h3 class="empty-state-title">Выберите раздел</h3>
+                    <p class="empty-state-text">Выберите раздел в боковом меню для просмотра содержимого</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- lil indicator at bottom right when editing -->
+    <div class="edit-mode-indicator">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        </svg>
+        Режим редактирования (F1×2)
+    </div>
+
+    <!-- modal popup for editing stuff -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Заголовок</h3>
+                <button class="modal-close" id="modalClose">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer" id="modalFooter"></div>
+        </div>
+    </div>
+
+    <!-- hidden input for loading json files -->
+    <input type="file" accept=".json" class="hidden-file-input" id="fileInput">
+
+    <script src="app.js"></script>
+</body>
+</html>
