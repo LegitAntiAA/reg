@@ -1,7 +1,7 @@
 // ============================================
 // the main app for the reglament viewer
-// press F1 twice toggle edit mode (maybe todo delete?)
-// orig docs is so terrible, no?
+// press F1 twice to toggle edit mode //todo: remove that?
+// orig docs is so terrible, isnt it?
 // ============================================
 
 // ===== fuzzy search stuff =====
